@@ -341,7 +341,7 @@ Successfully tagged konnichiwa-r2m:v1
 ```
 Nu vill du köra din Docker container för att se att allting har gått bra hittills, det gör du med följande kommando:
 
-`docker run -d --restart=unless-stopped -p 8080:8080 konnichiwa-r2m`
+`docker run -d --restart=unless-stopped -p 8080:8080 konnichiwa-r2m:v1`
 
 Testa att skriv `docker ps` så kommer du att se att du har startat en container, du bör få en utskrift som liknar den nedan.
 
