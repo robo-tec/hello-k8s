@@ -66,7 +66,8 @@ Om du använder Windows rekommenderar vi att du använder Docker Toolbox, då Do
 
 * https://docs.docker.com/toolbox/toolbox_install_windows/
 
-För att verifiera att Docker är korrekt installerat kan du köra Dockers egna Hello World container.
+För att verifiera att Docker är korrekt installerat kan du köra Dockers egna Hello World container. Starta *Docker Quickstart Terminal*
+och kör nedanstående kommando.
 
 `docker run hello-world`
 
@@ -112,9 +113,10 @@ Om du tidigare har interagerat med ett Kubernetes kluster via din dator, så sä
 
 `kubectl config use-context minikube`
 
-För att verifiera att din minikube installation fungerar, så ska du köra en enkel test-applikation.
+För att verifiera att din minikube installation fungerar, så ska du köra en enkel test-applikation. Börja med att starta
+*Microsoft Powershell* eller annan lämplig terminal.
 
-Börja med att starta ditt Kubernetes kluster genom att köra:
+Starta ditt Kubernetes kluster genom att köra:
 
 `minikube start`
 
@@ -228,7 +230,7 @@ Börja med att öppna katalogen `Hello_R2M` i din miljö med till exempel Intell
 Om du tittar runt i koden så kommer du se att applikationen skriver vi ut `Konnichiwa R2M` till `/` i webbläsaren. 
 Du får gärna utöka ändra eller utöka koden om du vill göra en mera avancerad Spring Boot applikation.
 
-Du behöver nu bygga applikationen med hjälp av Maven, du gör det genom att navigera till: `hello-k8s\Hello_R2M` i denna katalog skriver du sedan:
+Du behöver nu bygga applikationen med hjälp av Maven, du gör det genom att navigera till katalogen `hello-k8s\Hello_R2M` i din docker-terminal. I denna katalog skriver du sedan:
 
 `mvn package`
 
@@ -315,11 +317,11 @@ CMD java -jar demo-0.0.1-SNAPSHOT.jar
 
 Det är nu dags att skapa din container! :D
 
-Detta gör du genom att ställa dig i din Docker katalog, du vill dessutom tagga din container med ett passande namn, det gör du med hjälp av `-t` optionen, så skriv följande kommando och kom ihåg att starta Docker innan:
+Detta gör du genom att ställa dig i din Docker-katalog, du vill dessutom tagga din container med ett passande namn, det gör du med hjälp av `-t` optionen, så skriv följande kommando och kom ihåg att starta Docker innan:
 
 `docker build -t konnichiwa-r2m:v1 .`
 
-Utskriften du får bör se ut så här: 
+Utskriften du får kan se ut så här (om man har kört det förut, annars drar den hem några images först): 
 
 ```
 Sending build context to Docker daemon  16.72MB
@@ -375,7 +377,7 @@ Grattis du har nu byggt din egen container och du ska nu få sjösätta den i mi
 
 #### Starta minikube
 
-Börja med att starta minikube med:
+Gå till ditt andra terminalfönster (PowerShell eller motsvarande - inte Docker Quickstart). Börja med att starta minikube (om du inte redan gjort det) med:
 
 `minikube start`
 
@@ -408,7 +410,11 @@ Börja med att skriva följande kommando i din terminal:
 
 `minikube docker-env`
 
-I botten av utskriften bör du nu få ett kommando som du kan skriva i ditt shell för att återanvända daemon. I Windows Powershell är raden: `& minikube docker-env | Invoke-Expression` men den kan se olika ut beroende på vilket operativsystem du kör. 
+I botten av utskriften bör du nu få ett eller flera kommandon som du kan skriva i ditt shell för att återanvända daemon. I Windows Powershell är raden: `& minikube docker-env | Invoke-Expression` men den kan se olika ut beroende på vilket operativsystem du kör. 
+
+Nu har vi alltså pekat om docker-kommandona till att använda Minikubes container registry. För att kunna hitta den image vi skall starta måste du bygga den igen. Navigera till docker-katalogen och kör
+
+`docker build -t konnichiwa-r2m:v1 .`
 
 För att sätta ingång din container så kör nedanstående kommando. Kommandot gör en deployment ska göras med namnet `konnichiwa-r2m` från din image, där du sedan exponerar port 8080 på det interna kluster IP:et. 
 
